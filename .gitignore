@@ -1,1 +1,6 @@
+.env
+sources/app/node_modules
+sources/app/var
+sources/app/vendor
+
 
