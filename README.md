@@ -10,7 +10,8 @@ puis à partir d'une consomle ssh :
 Enfin les outils de débogage pour PHP comme CodeSniffer puis csfix et csCheck, phpStan
 et ses plugins: thecodingmachine/phpStan-standard-rules, ou Safe et phpStan-safe-rules
 
-Pour Vue.js et les outils de débogage pour JS le yarn install. 
+Pour Vue.js et les outils de débogage pour JS:
+le yarn install. 
 
 la branche master comprendra la solution de dev, puis une branche postMessages
 pour tester une spa sur un backend S4 API consommé par axios
