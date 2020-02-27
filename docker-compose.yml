@@ -28,10 +28,10 @@ services:
   mysql:
     image: mysql:5.7
     environment:
-      MYSQL_ROOT_PASSWORD: "$MYSQL_ROOT_PASSWORD"
-      MYSQL_DATABASE: "$MYSQL_DATABASE"
-      MYSQL_USER: "$MYSQL_USER"
-      MYSQL_PASSWORD: "$MYSQL_PASSWORD"
+      MYSQL_ROOT_PASSWORD: "admin"
+      MYSQL_DATABASE: "trsts"
+      MYSQL_USER: "foo"
+      MYSQL_PASSWORD: "bar"
     volumes:
       - mysql_data:/var/lib/mysql
       - ./services/mysql/utf8mb4.cnf:/etc/mysql/conf.d/utf8mb4.cnf:ro
