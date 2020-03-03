@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Entity\Post;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,6 +18,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * @Rest\Route("/api")
+ * @IsGranted("IS_AUTHENTICATED_FULLY")
  */
 final class PostController extends AbstractController
 {
@@ -36,6 +38,7 @@ final class PostController extends AbstractController
      * @throws BadRequestHttpException
      *
      * @Rest\Post("/posts", name="createPost")
+     * IsGrantzd("ROLE_FOO")
      */
     public function createAction(Request $request): JsonResponse
     {
