@@ -3,7 +3,11 @@
     <div class="row col">
       <h1>Posts</h1>
     </div>
-    <div class="row col">
+
+    <div 
+      v-if="canCreatePost"
+      class="row col"
+    >
       <form>
         <div class="form-row">
           <div class="col-8">
@@ -15,7 +19,7 @@
           </div>
           <div class="col-4">
             <button 
-              :disabled="message.length ===0 || isLoading"
+              :disabled="message.length === 0 || isLoading"
               type="button"
               clas="btn btn-primary"
               @click="createPost()"
@@ -37,12 +41,7 @@
       v-else-if="hasError"
       class="row col"
     >
-      <div
-        class="alert alert-danger"
-        role="alert"
-      >
-        {{ error }}
-      </div>
+      <error-message :error="error" />
     </div>
 
     <div
@@ -64,12 +63,14 @@
 </template>
 
 <script>
-import UnPost from "../views/UnPost";
+import UnPost from "../components/UnPost";
+import ErrorMessage from "../components/ErrorMessage";
 
 export default {
     name: "Posts",
     components: {
-        UnPost
+        UnPost,
+        ErrorMessage
     },
     data() {
         return {
@@ -91,10 +92,13 @@ export default {
         },
         posts() {
             return this.$store.getters["post/posts"];
+        },
+        canCreatePost() {
+            return this.$store.getters["security/hasRole"]("ROLE_FOO");
         }
     },
     created() {
-        this.$store.dispatch("post/findAll");
+        this.$store.dispatch("post/posts");
     },
     methods: {
         async createPost() {

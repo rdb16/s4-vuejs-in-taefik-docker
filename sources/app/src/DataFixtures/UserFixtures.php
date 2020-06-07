@@ -10,17 +10,34 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 final class UserFixtures extends Fixture
 {
-    public const DEFAULT_USER_LOGIN = 'login';
+    public const DEFAULT_USER_LOGIN = 'foo';
+    public const TOTO_USER_LOGIN = 'toto';
 
     public const DEFAULT_USER_PASSWORD = 'bar';
+    public const TOTO_USER_PASSWORD = 'toto';
+
+    public const USER_LOGIN_ROLE_BAR = 'bar';
+
+    public const USER_PASSWORD_ROLE_BAR = 'foo';
 
     public function load(ObjectManager $manager): void
     {
+        $this->createUser($manager, self::DEFAULT_USER_LOGIN, self::DEFAULT_USER_PASSWORD, ['ROLE_FOO']);
+        $this->createUser($manager, self::TOTO_USER_LOGIN, self::TOTO_USER_PASSWORD, ['ROLE_FOO']);
+        $this->createUser($manager, self::USER_LOGIN_ROLE_BAR, self::USER_PASSWORD_ROLE_BAR, ['ROLE_BAR']);
+    }
+
+    /**
+     * @param string[] $roles
+     */
+     private function createUser(ObjectManager $manager, string $login, string $password, array $roles): void
+     {
         $userEntity = new User();
-        $userEntity->setLogin(self::DEFAULT_USER_LOGIN);
-        $userEntity->setPlainPassword(self::DEFAULT_USER_PASSWORD);
-        $userEntity->setRoles(['ROLE_FOO']);
+        $userEntity->setLogin($login);
+        $userEntity->setPlainPassword($password);
+        $userEntity->setRoles($roles);
         $manager->persist($userEntity);
         $manager->flush();
-    }
+     }
+
 }
